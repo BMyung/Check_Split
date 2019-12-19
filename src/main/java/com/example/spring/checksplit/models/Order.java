@@ -1,5 +1,7 @@
 package com.example.spring.checksplit.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,13 @@ public class Order {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@OneToMany(mappedBy="order", fetch=FetchType.LAZY)
+	private List<Product> products;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="check_id")
+	private Check check;
 	
 	public Order() {
 		
@@ -55,8 +65,7 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 	
 	
 	

@@ -1,7 +1,6 @@
 package com.example.spring.checksplit.controllers;
 
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.spring.checksplit.models.Check;
+import com.example.spring.checksplit.models.Order;
+import com.example.spring.checksplit.models.Product;
 import com.example.spring.checksplit.services.MainService;
 
 @Controller
@@ -50,19 +51,35 @@ public class MainController {
 	
 	@PostMapping("/form/new")
 	public String phoneNumbers(@RequestParam("guest")String guest, @RequestParam("phone") String phone) {
-		List<String> guestList = this.mainService.splitList(guest);
-		System.out.println(guestList);
-		return "redirect:/orderform";
+//		List<String> guestList = this.mainService.splitList(guest);
+		return "redirect:/count";
 	}
 
 	//Method to send out texts
 	
+	@GetMapping("/count")
+	public String countForm() {
+		return "ordercount.jsp";
+	}
+	
+	@PostMapping("/ordercount")
+	public String setOrderCount(HttpSession session, @RequestParam("orderItemCount") Integer itemCount) {
+		session.setAttribute("orderItemCount", itemCount);
+		return "redirect:/orderform";
+	}
+	
 	@GetMapping("/orderform")
-	public String form() {
+	public String form(@ModelAttribute("item") Product product) {
 		return "mainform.jsp";
 	}
 	
 	@PostMapping("/orderform/process")
-	public String processData() {
+	public String processData(@ModelAttribute("item")Product product) {
+		Order order = new Order();
+		Double subtotal = this.mainService.addSubtotal(product);
+		order.setName(product.getName());
+		order.setSubtotal(subtotal);
+		mainService.save(order);
+		return "redirect:/total";
 	}
 }
