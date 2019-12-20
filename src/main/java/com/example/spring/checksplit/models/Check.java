@@ -1,6 +1,5 @@
 package com.example.spring.checksplit.models;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,9 +20,9 @@ public class Check {
 	private Double subtotal;
 	private Double taxAmount;
 	private Integer partySize;
-	private Integer itemsOrdered;
-	private Date date;
 	private String city;
+	private String code;
+	private Double total;
 	
 	@OneToMany(mappedBy="check", fetch=FetchType.LAZY)
 	private List<Order> orders;
@@ -62,23 +61,40 @@ public class Check {
 	public void setPartySize(Integer partySize) {
 		this.partySize = partySize;
 	}
-	public Integer getItemsOrdered() {
-		return itemsOrdered;
-	}
-	public void setItemsOrdered(Integer itemsOrdered) {
-		this.itemsOrdered = itemsOrdered;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+
 	public String getCity() {
 		return city;
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 

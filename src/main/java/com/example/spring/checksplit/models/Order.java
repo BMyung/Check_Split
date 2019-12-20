@@ -20,6 +20,8 @@ public class Order {
 	private Long id;
 	private String name;
 	private Double subtotal;
+	private Double tax;
+	private Double tip;
 	private Double total;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
@@ -64,6 +66,30 @@ public class Order {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Double getTip() {
+		return tip;
+	}
+	public void setTip(Double tip) {
+		this.tip = tip;
+	}
+	public Double getTax() {
+		return tax;
+	}
+	public void setTax(Double tax) {
+		this.tax = tax;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	public Check getCheck() {
+		return check;
+	}
+	public void setCheck(Check check) {
+		this.check = check;
 	}
 
 	

@@ -2,27 +2,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/js/ordercount.js"></script>
 </head>
 
 <body>
 <h2></h2>
-<form:form method="POST" action="/orderform/process" modelAttribute="item">
-	<c:forEach var="i" begin="1" end="${sessionScope.orderItemCount}">
+<form method="POST" action="/orderform/${code}/process">
+	<div class="input_fields_wrap">
+	<div>
+    	<p>
+			<label>Item ordered:</label>
+			<input type="text" name="name"/>
+		</p>
 		<p>
-			<form:label path="name">Item ordered:</form:label>
-			<form:input path="name"/>
-		</p><form:errors path="name" class="red" />
-		<p>
-			<form:label path="price">Subtotal (Before tax & tip):</form:label>
-			<form:input path="price"/>
-		</p><form:errors path="price" class="red" />
-		
-		
-		<hr>
-	</c:forEach>
-		
+			<label>Subtotal (Before tax & tip):</label>
+			<input type="text" name="price"/>
+		</p>
+</div>
+</div>
+    <button class="add_field_button">Add another item</button>
+    <br>
+    <br>
+ <input type="radio" name="tipPercent" value=0> None<br>
+ <input type="radio" name="tipPercent" value=.15> 15%<br>
+<input type="radio" name="tipPercent" value=.18> 18%<br>
+<input type="radio" name="tipPercent" value="other"> Other
+<input type="text" name="tipPercent">
+    <br>
+    <br>
+    
 		<input type="submit">
-</form:form>
+</form>
 
 </body>
 

@@ -21,6 +21,8 @@ Please enter the number of items ordered
 
 <h2>2. Test JS</h2>
 <div id="msg"></div>
+<div id="changeText"></div>
+
 
 
 </body>
