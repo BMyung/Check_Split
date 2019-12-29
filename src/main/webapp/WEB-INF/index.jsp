@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<link href="/css/style.css" rel="stylesheet">
+    <script src="/js/main.js"></script>
 </head>
 <body>
 <form:form action="/checks/new" method="POST" modelAttribute="check">
+	<h2>Enter your check information</h2>
 		<p>
 			<form:label path="restaurant">Restaurant Name</form:label>
 			<form:input path="restaurant"/>
